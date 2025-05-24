@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS dPainelDB;
 USE dPainelDB;
 
 -- Criação da tabela de lutadores
-CREATE TABLE mural (
+CREATE TABLE card (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
     descricaoPublica TEXT,

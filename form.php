@@ -1,5 +1,6 @@
 <?php
-require 'conexao.php';
+require_once 'conexao.php';
+require_once 'acoes.php';
 ?>
 
 <!doctype html>
@@ -15,106 +16,95 @@ require 'conexao.php';
 
 <body>
     <div class="container-sm">
-        <div class="mb-3">
+        <form action="acoes.php" method="post">
             <div class="mb-3">
-                <a href="index.php" class="btn btn-primary">Voltar para o CARD</a>
+                <h1 class="text-center">Cadastro de Ocorrências</h1>
             </div>
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Titulo</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Titulo">
+                <div class="mb-3">
+                    <a href="index.php" class="btn btn-primary">Voltar para o CARD</a>
+                </div>
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Titulo</label>
+                    <input type="text" name="titulo" class="form-control" id="titulo" placeholder="Titulo">
+                </div>
+                <!-- ==== -->
+                <div class="mb-3">
+                    <label for="descricaoPublica" class="form-label">Descrição pública</label>
+                    <input type="text" name="descricaoPublica" class="form-control" id="descricaoPublica" placeholder="Descrição pública">
+                </div>
+                <!-- ==== -->
+                <div class="mb-3">
+                    <label for="descricaoInterna" class="form-label">Descrição Privada</label>
+                    <input type="text" name="descricaoInterna" class="form-control" id="descricaoInterna" placeholder="Descrição Privada">
+                </div>
+                <!-- ==== -->
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select class="form-select" name="status" id="status" aria-label="Default select example">
+                        <option selected>Status</option>
+                        <option value="1">Em andamento</option>
+                        <option value="2">Resolvido</option>
+                        <option value="3">Aguardando energia</option>
+                        <option value="4">Em verificação</option>
+                    </select>
+                </div>
+                <!-- ==== -->
+                <div class="mb-3">
+                    <label for="rua" class="form-label">Rua</label>
+                    <input type="text" name="rua" class="form-control" id="rua" placeholder="Rua">
+                </div>
+                <!-- ==== -->
+                <div class="mb-3">
+                    <label for="bairro" class="form-label">Bairro</label>
+                    <input type="text" name="bairro" class="form-control" id="bairro" placeholder="Bairro">
+                </div>
+                <!-- ==== -->
+                <div class="mb-3">
+                    <label for="cidade" class="form-label">Cidade</label>
+                    <input type="text" name="cidade" class="form-control" id="cidade" placeholder="Cidade">
+                </div>
+                <!-- ==== -->
+                <div class="mb-3">
+                    <label for="projeto" class="form-label">Projeto</label>
+                    <input type="text" name="projeto" class="form-control" id="projeto" placeholder="Projeto">
+                </div>
+                <!-- ==== -->
+                <div class="mb-3">
+                    <label for="prazoEstimado" class="form-label">Prazo estimado</label>
+                    <input type="text" name="prazoEstimado" class="form-control" id="prazoEstimado" placeholder="Prazo estimado">
+                </div>
+                <!-- ==== -->
+                <div class="mb-3">
+                    <label for="imagemOcorrencia" class="form-label">Imagem da ocorrência</label>
+                    <input class="form-control" type="file" name="imagemOcorrencia" id="imagemOcorrencia">
+                </div>
+                <!-- ==== -->
+                <div class="mb-3">
+                    <label for="dataCriacao" class="form-label">Data da criação</label>
+                    <input type="date" name="dataCriacao" class="form-control" id="dataCriacao">
+                </div>
+                <!-- ==== -->
+                <div class="mb-3">
+                    <label for="dataAtualizacao" class="form-label">Data da atualização</label>
+                    <input type="date" name="dataAtualizacao" class="form-control" id="dataAtualizacao">
+                </div>
+                <!-- ==== -->
+                <div class="mb-3">
+                    <label for="tecnicoResponsavel" class="form-label">Tecnico</label>
+                    <input type="text" name="tecnicoResponsavel" class="form-control" id="tecnicoResponsavel" placeholder="Tecnico">
+                </div>
+                <!-- ==== -->
+                <div class="mb-3">
+                    <label for="supervisor" class="form-label">Supervisor</label>
+                    <input type="text" name="supervisor" class="form-control" id="supervisor" placeholder="Supervisor">
+                </div>
+                <!-- ==== -->
+                <div class="mb-3 text-center">
+                    <button type="submit" name="create_card" class="btn btn-success">Cadastrar</button>
+                </div>
             </div>
-            <!-- ==== -->
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Descrição pública</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Descrição pública">
-            </div>
-            <!-- ==== -->
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Descrição Privada</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Descrição Privada">
-            </div>
-            <!-- ==== -->
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Status</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Status</option>
-                    <option value="1">Em andamento</option>
-                    <option value="2">Resolvido</option>
-                    <option value="3">Aguardando energia</option>
-                    <option value="4">Em verificação</option>
-                </select>
-            </div>
-            <!-- ==== -->
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Rua</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Rua">
-            </div>
-            <!-- ==== -->
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Bairro</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Bairro">
-            </div>
-            <!-- ==== -->
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Cidade</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Cidade</option>
-                    <option value="1">Vitória de Santo Antão</option>
-                    <option value="2">Carpina</option>
-                    <option value="3">Recife</option>
-                    <option value="4">Sairé</option>
-                </select>
-            </div>
-            <!-- ==== -->
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Projeto</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Projeto">
-            </div>
-            <!-- ==== -->
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Prazo estimado</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Prazo estimado">
-            </div>
-            <!-- ==== -->
-            <div class="mb-3">
-                <label for="formFile" class="form-label">Imagem da ocorrência</label>
-                <input class="form-control" type="file" id="formFile">
-            </div>
-            <!-- ==== -->
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Data da criação</label>
-                <input type="date" class="form-control" id="exampleFormControlInput1">
-            </div>
-            <!-- ==== -->
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Data da atualização</label>
-                <input type="date" class="form-control" id="exampleFormControlInput1">
-            </div>
-            <!-- ==== -->
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Técnico responsál</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Técnico</option>
-                    <option value="1">João Carlos</option>
-                    <option value="2">Gabriel Silva</option>
-                    <option value="3">Anderson Pontes</option>
-                    <option value="4">Felipe Lima</option>
-                    <option value="3">Guilherme Borges</option>
-                </select>
-            </div>
-            <!-- ==== -->
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Supervisor da área</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Supervisor</option>
-                    <option value="1">Emersom</option>
-                    <option value="2">Diego</option>
-                    <option value="3">Jefersson</option>
-                    <option value="4">Gilberto</option>
-                    <option value="3">Sebastião</option>
-                </select>
-            </div>
-        </div>
+        </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
