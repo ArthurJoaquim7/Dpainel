@@ -1,0 +1,10 @@
+.corner{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 5px;
+}
+
+.card-text{
+    margin: 0;
+}
