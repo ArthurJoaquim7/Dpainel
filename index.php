@@ -50,17 +50,30 @@ require 'conexao.php';
                     <h3>OCORRÊNCIAS</h3>
                 </div>
                 <div class="bottom">
-                    <div class="card" style="width: 28rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Vitória de Santo Antão</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary">Livramento</h6>
-                            <p class="card-text">Rompimento de fibras</p>
-                            <p class="card-text">Tempo médio de reparo: 2 horas</p>
-                            <div class="corner">
-                                <span class="badge text-bg-primary">Em andamento</span>
+                    <?php
+                    $sql = 'SELECT * FROM card';
+                    $card = mysqli_query($conexao, $sql);
+                    if (mysqli_num_rows($card) > 0) {
+                        foreach ($card as $cards) {
+                    ?>
+                            <div class="card" style="width: 28rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= $cards['cidade'] ?></h5>
+                                    <h6 class="card-subtitle mb-2 text-body-secondary"><?= $cards['bairro'] ?></h6>
+                                    <p class="card-text"><?= $cards['descricaoPublica'] ?></p>
+                                    <p class="card-text">Prazo estimado: <?= $cards['prazoEstimado'] ?></p>
+                                    <div class="corner">
+                                        <span class="badge text-bg-primary"><?= $cards['status'] ?></span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+
+                    <?php
+                        }
+                    } else {
+                        echo '<h5>Cadastre um novo Card</h5>';
+                    }
+                    ?>
                 </div>
             </div>
         </div>

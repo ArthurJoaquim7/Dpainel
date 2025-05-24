@@ -2,7 +2,7 @@
 
 session_start();
 require_once 'conexao.php';
-require_once 'card.php';
+// require_once 'card.php';
 require_once 'form.php';
 
 if (isset($_POST['create_card'])) {

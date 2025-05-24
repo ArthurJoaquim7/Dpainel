@@ -43,10 +43,10 @@ require_once 'acoes.php';
                     <label for="status" class="form-label">Status</label>
                     <select class="form-select" name="status" id="status" aria-label="Default select example">
                         <option selected>Status</option>
-                        <option value="1">Em andamento</option>
-                        <option value="2">Resolvido</option>
-                        <option value="3">Aguardando energia</option>
-                        <option value="4">Em verificação</option>
+                        <option value="Em andamento">Em andamento</option>
+                        <option value="Resolvido">Resolvido</option>
+                        <option value="Aguardando energia">Aguardando energia</option>
+                        <option value="Em verificação">Em verificação</option>
                     </select>
                 </div>
                 <!-- ==== -->
@@ -60,9 +60,15 @@ require_once 'acoes.php';
                     <input type="text" name="bairro" class="form-control" id="bairro" placeholder="Bairro">
                 </div>
                 <!-- ==== -->
-                <div class="mb-3">
+               <div class="mb-3">
                     <label for="cidade" class="form-label">Cidade</label>
-                    <input type="text" name="cidade" class="form-control" id="cidade" placeholder="Cidade">
+                    <select class="form-select" name="cidade" id="cidade" aria-label="Default select example">
+                        <option selected>Cidade</option>
+                        <option value="Vitória de Santo Antão">Vitória de Santo Antão</option>
+                        <option value="Carpina">Carpina</option>
+                        <option value="Sairé">Sairé</option>
+                        <option value="Recife">Recife</option>
+                    </select>
                 </div>
                 <!-- ==== -->
                 <div class="mb-3">
