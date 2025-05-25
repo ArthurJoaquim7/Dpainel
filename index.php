@@ -59,14 +59,19 @@ require 'conexao.php';
                     ?>
                             <div class="card" style="width: 28rem;">
                                 <div class="card-body">
+                                    <img src="/uploads/<?= htmlspecialchars($cards['imagemOcorrencia']) ?>" alt="Imagem da ocorrência" style="border-radius: 5px" width="100%" height="200px">
                                     <h5 class="card-title"><?= $cards['cidade'] ?></h5>
-                                    <h6 class="card-subtitle mb-2 text-body-secondary"><?= $cards['bairro'] ?></h6>
+                                    <div class="flex" style="display: flex; gap: 5px;">
+                                        <h6 class="card-subtitle mb-2 text-body-secondary"><?= $cards['rua'] ?>,</h6>
+                                        <h6 class="card-subtitle mb-2 text-body-secondary"><?= $cards['bairro'] ?></h6>
+                                    </div>
                                     <p class="card-text"><?= $cards['descricaoPublica'] ?></p>
                                     <p class="card-text">Prazo estimado: <?= $cards['prazoEstimado'] ?></p>
                                     <div class="corner">
                                         <span class="badge text-bg-primary"><?= $cards['status'] ?></span>
                                     </div>
                                     <a href="/components/view.php?id=<?= $cards['id'] ?>" class="btn btn-secondary">Detalhes</a>
+                                    <a href="/components/view.php?id=<?= $cards['id'] ?>" class="btn btn-secondary">Editar</a>
                                     <form action="acoes.php" method="POST" class="d-inline">
                                         <button type="submit" name="delete_card" value="<?= $cards['id'] ?>" class="btn btn-danger">Deletar</button>
                                     </form>
