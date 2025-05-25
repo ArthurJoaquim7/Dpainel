@@ -1,6 +1,6 @@
 <?php
-require_once 'conexao.php';
-require_once 'acoes.php';
+require_once '../conexao.php';
+require_once '../acoes.php';
 ?>
 
 <!doctype html>
@@ -16,13 +16,13 @@ require_once 'acoes.php';
 
 <body>
     <div class="container-sm">
-        <form action="acoes.php" method="post">
+        <form action="../acoes.php" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <h1 class="text-center">Cadastro de Ocorrências</h1>
             </div>
             <div class="mb-3">
                 <div class="mb-3">
-                    <a href="index.php" class="btn btn-primary">Voltar para o CARD</a>
+                    <a href="../index.php" class="btn btn-primary">Voltar para o CARD</a>
                 </div>
                 <div class="mb-3">
                     <label for="titulo" class="form-label">Titulo</label>
@@ -60,7 +60,7 @@ require_once 'acoes.php';
                     <input type="text" name="bairro" class="form-control" id="bairro" placeholder="Bairro">
                 </div>
                 <!-- ==== -->
-               <div class="mb-3">
+                <div class="mb-3">
                     <label for="cidade" class="form-label">Cidade</label>
                     <select class="form-select" name="cidade" id="cidade" aria-label="Default select example">
                         <option selected>Cidade</option>

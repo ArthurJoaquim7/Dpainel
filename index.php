@@ -1,5 +1,6 @@
 <?php
 require 'conexao.php';
+// require '/PJC/Dpainel/conexao.php'
 ?>
 
 <!doctype html>
@@ -19,7 +20,7 @@ require 'conexao.php';
             <div class="left"></div>
             <div class="right">
                 <div class="top">
-                    <a href="form.php" class="btn btn-primary">Criar um CARD</a>
+                    <a href="/components/form.php" class="btn btn-primary">Criar um CARD</a>
                     <h2>EMERGÊNCIAS ATIVAS</h2>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,9 +66,10 @@ require 'conexao.php';
                                     <div class="corner">
                                         <span class="badge text-bg-primary"><?= $cards['status'] ?></span>
                                     </div>
+                                    <a href="/components/view.php?id=<?= $cards['id'] ?>" class="btn btn-secondary">Detalhes</a>
+                                    <button type="submit" name="delete_card" value="<?=$cards['id']?>" class="btn btn-danger">Deletar</button>
                                 </div>
                             </div>
-
                     <?php
                         }
                     } else {

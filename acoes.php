@@ -2,8 +2,6 @@
 
 session_start();
 require_once 'conexao.php';
-// require_once 'card.php';
-require_once 'form.php';
 
 if (isset($_POST['create_card'])) {
 
@@ -16,21 +14,45 @@ if (isset($_POST['create_card'])) {
     $cidade = mysqli_real_escape_string($conexao, trim($_POST['cidade']));
     $projeto = isset($_POST['projeto']) ? mysqli_real_escape_string($conexao, trim($_POST['projeto'])) : '';
     $prazoEstimado = isset($_POST['prazoEstimado']) ? mysqli_real_escape_string($conexao, trim($_POST['prazoEstimado'])) : '';
-    $imagemOcorrencia = isset($_FILES['imagemOcorrencia']['name']) ? $_FILES['imagemOcorrencia']['name'] : '';
     $dataCriacao = mysqli_real_escape_string($conexao, trim($_POST['dataCriacao']));
     $dataAtualizacao = isset($_POST['dataAtualizacao']) ? mysqli_real_escape_string($conexao, trim($_POST['dataAtualizacao'])) : '';
     $tecnicoResponsavel = isset($_POST['tecnicoResponsavel']) ? mysqli_real_escape_string($conexao, trim($_POST['tecnicoResponsavel'])) : '';
     $supervisor = isset($_POST['supervisor']) ? mysqli_real_escape_string($conexao, trim($_POST['supervisor'])) : '';
 
+    // Processa o upload da imagem
+    $imagemOcorrencia = '';
+    if (!empty($_FILES['imagemOcorrencia']['tmp_name'])) {
+        $nomeOriginal = basename($_FILES['imagemOcorrencia']['name']);
+        $extensao = pathinfo($nomeOriginal, PATHINFO_EXTENSION);
+        $nomeUnico = uniqid('img_', true) . '.' . $extensao;
+        $caminho = 'uploads/' . $nomeUnico;
 
-    // Move the uploaded file to the desired directory
-    if (isset($_FILES['imagemOcorrencia']) && isset($_FILES['imagemOcorrencia']['tmp_name']) && !empty($imagemOcorrencia)) {
-        move_uploaded_file($_FILES['imagemOcorrencia']['tmp_name'], 'uploads/' . $imagemOcorrencia);
+        if (move_uploaded_file($_FILES['imagemOcorrencia']['tmp_name'], $caminho)) {
+            $imagemOcorrencia = $nomeUnico;
+        } else {
+            $_SESSION['message'] = "Erro ao mover o arquivo de imagem.";
+            header("Location: /components/form.php");
+            exit;
+        }
     }
 
-    $sql = "INSERT INTO card (titulo, descricaoPublica, descricaoInterna, status, rua, bairro, cidade, projeto, prazoEstimado, imagemOcorrencia, dataCriacao, dataAtualizacao, tecnicoResponsavel, supervisor) 
-            VALUES ('$titulo', '$descricaoPublica', '$descricaoInterna', '$status', '$rua', '$bairro', '$cidade', '$projeto', '$prazoEstimado', '$imagemOcorrencia', '$dataCriacao', '$dataAtualizacao', '$tecnicoResponsavel', '$supervisor')";
+    // Inserção no banco
+    $sql = "INSERT INTO card (
+                titulo, descricaoPublica, descricaoInterna, status, rua, bairro, cidade,
+                projeto, prazoEstimado, imagemOcorrencia, dataCriacao, dataAtualizacao,
+                tecnicoResponsavel, supervisor
+            ) VALUES (
+                '$titulo', '$descricaoPublica', '$descricaoInterna', '$status', '$rua', '$bairro',
+                '$cidade', '$projeto', '$prazoEstimado', '$imagemOcorrencia', '$dataCriacao',
+                '$dataAtualizacao', '$tecnicoResponsavel', '$supervisor'
+            )";
 
-    mysqli_query($conexao, $sql);
-    $_SESSION['message'] = "Card created successfully!";
+    if (mysqli_query($conexao, $sql)) {
+        $_SESSION['message'] = "Card criado com sucesso!";
+    } else {
+        $_SESSION['message'] = "Erro ao criar card: " . mysqli_error($conexao);
+    }
+
+    header("Location: /components/form.php"); // redireciona após processar
+    exit;
 }
