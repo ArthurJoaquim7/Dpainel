@@ -56,3 +56,21 @@ if (isset($_POST['create_card'])) {
     header("Location: /components/form.php"); // redireciona após processar
     exit;
 }
+
+if (isset($_POST['delete_card'])) {
+    $card_id = mysqli_real_escape_string($conexao, $_POST['delete_card']);
+
+    $sql = "DELETE FROM card WHERE id = '$card_id'";
+
+    mysqli_query($conexao, $sql);
+
+    if (mysqli_affected_rows($conexao) > 0) {
+        $_SESSION['message'] = 'Card deletado com sucesso!';
+        header('Location: index.php');
+        exit;
+    } else {
+        $_SESSION['message'] = 'Erro ao deletar o Card' . mysqli_error($conexao);
+        header('Location: index.php');
+        exit;
+    }
+}

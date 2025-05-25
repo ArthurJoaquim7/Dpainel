@@ -67,7 +67,9 @@ require 'conexao.php';
                                         <span class="badge text-bg-primary"><?= $cards['status'] ?></span>
                                     </div>
                                     <a href="/components/view.php?id=<?= $cards['id'] ?>" class="btn btn-secondary">Detalhes</a>
-                                    <button type="submit" name="delete_card" value="<?=$cards['id']?>" class="btn btn-danger">Deletar</button>
+                                    <form action="acoes.php" method="POST" class="d-inline">
+                                        <button type="submit" name="delete_card" value="<?= $cards['id'] ?>" class="btn btn-danger">Deletar</button>
+                                    </form>
                                 </div>
                             </div>
                     <?php
